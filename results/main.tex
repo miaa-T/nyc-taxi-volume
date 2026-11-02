@@ -55,8 +55,6 @@
 
     \begin{tabular}{rl}
         \textbf{Student:} & TOUBAL Mahdia\\
-        \textbf{Programme:} & Master 2 -- DISS\\
-        \textbf{Institution:} & Université Claude Bernard Lyon 1\\
         \textbf{Submission date:} & 29 October 2026\\
     \end{tabular}
 
@@ -109,17 +107,16 @@ The acquisition script downloads all 36 monthly trip files and the
 lookup table. The downloaded raw files represent approximately
 \textbf{1.81 GB} of data.
 
-\section{Technology and Processing Choice}
+\section{Implementation Environment and Processing}
 
-Apache Spark was selected because the dataset contains more than
-119 million trip records. Spark supports distributed data processing,
-SQL-based aggregation, and Parquet storage.
+The project was implemented using Python 3.11 and PySpark 3.5.8,
+with Apache Spark SQL for data processing and analysis. Docker was
+used to provide a consistent local execution environment.
 
-The pipeline was implemented using PySpark 3.5.8 and Python 3.11.
-The processing was executed locally through Docker.
-
-The source files were read using explicit schemas and stored as typed
-Parquet datasets before cleaning and analysis.
+The 36 monthly source files were ingested using explicit schemas
+and stored as typed Parquet datasets, partitioned by year and month.
+The resulting data was then cleaned, joined with the Taxi Zone Lookup
+table, and analysed using Spark SQL.
 
 \vspace{5pt}
 \hrule
@@ -137,15 +134,20 @@ The processing pipeline consists of the following stages:
 \begin{enumerate}
     \item \textbf{Acquisition:} download the 36 monthly Yellow Taxi
     files and the taxi zone lookup table.
+
     \item \textbf{Ingestion:} read the source data with explicit Spark
     schemas and store the records in Parquet format, partitioned by year
     and month.
+
     \item \textbf{Cleaning:} remove trips whose drop-off timestamp is
     earlier than their pickup timestamp.
+
     \item \textbf{Joining:} enrich each trip with its pickup zone name,
     borough, and service zone using the lookup table.
+
     \item \textbf{Analysis:} use Spark SQL to calculate pickup counts
     by zone, hour, and day of the week.
+
     \item \textbf{Validation and visualisation:} check aggregate totals
     and generate charts from the analysis results.
 \end{enumerate}
@@ -195,6 +197,7 @@ in the cleaned dataset matched a lookup entry.
 \section{Analysis Method}
 
 Spark SQL was used to calculate the number of pickups for each:
+
 \begin{itemize}
     \item pickup zone and borough;
     \item hour of the day (0--23);
