@@ -1,0 +1,30 @@
+# Raw datasets
+data/raw/
+
+# Processed datasets
+data/processed/
+
+# Python temporary files
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+
+# OS files
+.DS_Store
+Thumbs.db
+# Spark temporary files
+*.crc
+_SUCCESS
+
+# LaTeX temporary files
+*.aux
+*.log
+*.out
+*.toc
+texput.log
