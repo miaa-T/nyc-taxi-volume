@@ -171,7 +171,3 @@ docker run --rm -v "${PWD}:/app" -w /app nyc-taxi-spark python src/plot_results.
 ```
 
 The raw and processed datasets are not included in the Git repository. They are downloaded and generated locally by the pipeline.
-
-## 9. Repository
-
-GitHub repository: **[Insert your GitHub repository URL here]**
